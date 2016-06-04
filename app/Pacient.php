@@ -16,8 +16,9 @@ class Pacient extends Model
 
     public function getAge()
     {
-    	$curr_year = $this->birth_date;
+    	$year = date_parse($this->birth_date);
+    	$curr_year = date("Y");
 
-    	
+    	return $curr_year - $year["year"];
     }
 }
