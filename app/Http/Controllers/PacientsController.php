@@ -110,6 +110,21 @@ class PacientsController extends Controller
      */
     public function destroy($id)
     {
-      
+        $pacient = Pacient::find($id);
+
+        $pacient->delete();
+
+        $pacients = Pacient::all();
+
+        $data = [
+          'title_table' => 'Listado de Pacientes',
+          'button_delete' => 'Eliminar Paciente',
+          'button_create' => 'Crear Paciente',
+          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Edad"),
+          'pacients' => $pacients,
+          'icons' => ['fa fa-user' => 'Pacientes']
+        ];
+
+        return view('admin.pacient.index', $data);
     }
 }

@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'AdminController@getIndex');
 
 
 Route::group(['prefix' => 'admin'], function()

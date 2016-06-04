@@ -40,6 +40,10 @@
                                 @endif
                             </td>
                             <td>{{ $pacient->birth_date }}</td>
+                            <td>
+                              <a href="#"><i class="glyphicon glyphicon-eye-open"></i></a> 
+                              <a href="{{ url('/admin/pacient', [$pacient->idPacient]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Are you sure?"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
                           </tr>
                         @endforeach
                     </tbody>

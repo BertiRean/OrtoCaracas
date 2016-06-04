@@ -10,6 +10,8 @@ class Pacient extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = "idPacient";
+
     protected $fillable = ['name_pacient', 'ci_pacient', 'sex', 'birth_date', 'phone_pacient'];
 
     public function getAge()
