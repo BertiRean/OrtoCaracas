@@ -1,3 +1,6 @@
+@extends('admin.template.main')
+
+@section('container')
 <div id="wrapper">
         <div id="page-wrapper">
 
@@ -32,6 +35,15 @@
                                     <th>{{$table_label}}</th>
                                 @endforeach
                             </thead>
+
+                            <tbody>
+                                @foreach($model as $pacient)
+                                    <td>{{ $pacient->name_pacient}} </td>
+                                    <td>{{ $pacient->ci_pacient }}</td>
+                                    <td>{{ $pacient->phone_pacient }}</td>
+                                    <td>{{ $pacient->sex }}</td>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
 
@@ -41,3 +53,5 @@
             </div>
         </div>
 </div>
+@endsection
+
