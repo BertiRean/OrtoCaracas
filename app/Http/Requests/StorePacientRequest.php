@@ -29,6 +29,7 @@ class StorePacientRequest extends Request
             'sex' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'address' => 'required',
         ];
     }
 }
