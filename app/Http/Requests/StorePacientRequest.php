@@ -32,4 +32,16 @@ class StorePacientRequest extends Request
             'address' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El Nombre no puede dejarse en blanco',
+            'ci.required'  => 'La cedula no puede dejarse en blanco',
+            'phone.required' => 'Debe al menos colocar 1 telefono',
+            'email.required' => 'Es obligatorio una direccion de email',
+            'address.required' => 'La Direccion no puede dejarse en blanco',
+            'ci.unique' => 'El Paciente ya se encuentra registrado en la base de datos',
+        ];
+    }
 }
