@@ -12,8 +12,6 @@
       {{ Html::link('/admin/pacient/create', $button_create, ['class' => 'btn btn-success']) }}
       {{ Html::link('#', $button_delete, ['class' => 'btn btn-danger', 'id' => 'delete']) }}
 
-
-
       <!-- Table of Data -->
       <div class="row">
           <div class="col-lg-12">
@@ -32,8 +30,14 @@
                           <tr data-id = "{{ $pacient->id_pacient }}">
                             <td>{{ $pacient->name}} </td>
                             <td>{{ $pacient->ci }}</td>
-                            <td>{{ $pacient->contact["phone_1"] }}</td>
-                            <td>{{ $pacient->contact["phone_2"] }}</td>
+
+                            <!-- Show Phones -->
+                            @foreach($pacient->phones as $phone)
+
+                              <td>{{ $phone["phone_number"]}}</td>
+
+                            @endforeach
+                            <!-- End of Shows -->
                             <td>{{ $pacient->contact["address"] }}</td>
                             <td>
                                 @if($pacient->sex === 'M')
@@ -43,6 +47,7 @@
                                 @endif
                             </td>
                             <td>{{ $pacient->contact["email"] }}</td>
+                            <td>{{ $pacient->birth_date }}</td>
                             <td>
                               <a href="#" id="ver"><i class="glyphicon glyphicon-eye-open"></i></a> 
                               <a href="{{ url('/admin/pacient', [$pacient->idPacient]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?"><i class="glyphicon glyphicon-trash"></i></a>

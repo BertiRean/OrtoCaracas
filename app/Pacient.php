@@ -19,5 +19,10 @@ class Pacient extends Model
     	return $this->hasOne('App\Contact', 'id_contact', 'contact_id');
     }
 
+    public function phones()
+    {
+    	return $this->hasMany('App\Phone', 'contact_id', 'contact_id');
+    }
+
     
 }
