@@ -18,7 +18,7 @@ class CreatePacientsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id_pacient');
             $table->string('name', 128);
-            $table->integer('ci')->unique();
+            $table->integer('ci')->unique()->unsigned();
             $table->date('birth_date');
             $table->char('sex', 1);
             $table->boolean('status');

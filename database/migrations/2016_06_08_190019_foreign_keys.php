@@ -40,6 +40,11 @@ class ForeignKeys extends Migration
             $table->foreign('pacient_id')->references('id_pacient')->on('pacients');
         });
 
+        Schema::table('phones', function(Blueprint $table)
+        {
+            $table->foreign('contact_id')->references('id_contact')->on('contacts');
+        });
+
     }
 
     /**

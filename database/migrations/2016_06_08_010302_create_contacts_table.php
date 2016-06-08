@@ -18,8 +18,6 @@ class CreateContactsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id_contact');
             $table->string('email', 64);
-            $table->bigInteger('phone_1');
-            $table->bigInteger('phone_2');
             $table->string('address', 256);
         });
     }

@@ -20,8 +20,8 @@ class CreateDoctorsTable extends Migration
 
             $table->increments('id_doctor');
             $table->string('name', 128)->default("");
-            $table->integer('ci')->unsigned();
-            $table->bigInteger('bank_account');
+            $table->string('ci', 16)->unique()->default("");
+            $table->string('bank_account', 20)->default("");
             $table->integer('contact_id')->unsigned();
         });
     }
