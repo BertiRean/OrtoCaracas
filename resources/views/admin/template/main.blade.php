@@ -18,8 +18,9 @@
 
     {!! Html::style('assets/admin/font-awesome/css/font-awesome.min.css') !!}
 
-    <title>Ortodoncia Caracas - @yield('title', 'Inicio')</title> 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/u/dt/dt-1.10.12/datatables.min.css"/>
 
+    <title>Ortodoncia Caracas - @yield('title', 'Inicio')</title> 
 
   </head>
   
@@ -38,6 +39,9 @@
     <script src = "{{ asset('/assets/js/bootstrap.js') }}"></script>
     <script src = "{{ asset('/assets/js/ui/jquery-ui.js') }}"></script>
 
+    <!-- Additional Scripts -->
+
+
     <!-- jQueryUi Theme -->
     {!! Html::style('assets/js/ui/jquery-ui.css') !!}
     <!-- Bootstrap Core JavaScript -->
@@ -45,18 +49,11 @@
     <!-- Morris Charts JavaScript -->
 
     {!! Html::script('assets/admin/js/plugins/morris/raphael.min.js',['type' => 'text/javascript']) !!}
-    {!! Html::script('assets/admin/js/plugins/morris/morris.min.js', ['type' => 'text/javascript'])  !!}
-    {!! Html::script('assets/admin/js/plugins/morris/morris-data.js', ['type' => 'text/javascript']) !!}
 
     <script src="/assets/js/laravel.js"></script>
 
-    <script src="{{asset('assets/plugins/datePicker/js/bootstrap-datepicker.js')}}"></script>
-    <!-- Languaje -->
-    <script src="{{asset('assets/plugins/datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/u/dt/dt-1.10.12/datatables.min.js"></script>
 
-    <link rel="stylesheet" href="{{asset('assets/plugins/datePicker/css/bootstrap-datepicker3.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/plugins/datePicker/css/bootstrap-datepicker3.standalone.css')}}">
-    
     @yield('scripts')
 
   </body>
