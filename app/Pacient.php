@@ -6,19 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pacient extends Model
 {
-    protected $table = "Pacient";
+    protected $table = "pacients";
 
     public $timestamps = false;
 
-    protected $primaryKey = "idPacient";
+    protected $primaryKey = "id_pacient";
 
-    protected $fillable = ['name_pacient', 'ci_pacient', 'sex', 'birth_date', 'phone_pacient'];
+    protected $fillable = ['name', 'ci', 'sex', 'birth_date', 'contact_id'];
 
-    public function getAge()
+    public function contact()
     {
-    	$year = date_parse($this->birth_date);
-    	$curr_year = date("Y");
-
-    	return $curr_year - $year["year"];
+    	return $this->hasOne('App\Contact', 'id_contact', 'contact_id');
     }
+
+    
 }

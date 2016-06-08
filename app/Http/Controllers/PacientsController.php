@@ -24,7 +24,7 @@ class PacientsController extends Controller
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Acciones"),
           'pacients' => $pacients,
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
@@ -60,25 +60,27 @@ class PacientsController extends Controller
         $pacient = new Pacient;
         $contact = new Contact;
 
-        $pacient->name_pacient = $request->name_pacient;
-        $pacient->ci_pacient = $request->ci_pacient;
+        $pacient->name = $request->name;
+        $pacient->ci = $request->ci;
         $pacient->sex = $request->sex;
         $pacient->birth_date = $request->birth_date;
 
-        $contact->phone = $request->phone;
+        $contact->phone_1 = $request->phone;
+        $contact->phone_2 = $request->phone2;
         $contact->email = $request->email;
+        $contact->address = $request->address;
         $contact->save();
 
-        $pacient->contact_id = $contact->idcontact;
+        $pacient->contact_id = $contact->id_contact;
 
         $pacient->save();
-
 
         $data = [
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Acciones"),
+
           'pacients' => Pacient::all(),
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
@@ -142,7 +144,8 @@ class PacientsController extends Controller
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Acciones"),
+
           'pacients' => $pacients,
           'icons' => ['fa fa-user' => 'Pacientes']
         ];

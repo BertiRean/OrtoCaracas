@@ -31,18 +31,32 @@
             {!! csrf_field() !!}
 
             <!-- Input Name -->
-            {!! Form::label('name_pacient', 'Nombre Completo', ['class' => 'control-label']) !!}
-            {!! Form::text('name_pacient', null ,['placeholder' => 'Ej: Antonio Berti', 'class' => 'form-control']) !!}
+            {!! Form::label('name', 'Nombre Completo', ['class' => 'control-label', 'id' => 'pacient-name']) !!}
+            {!! Form::text('name', null ,['placeholder' => 'Ej: Antonio Berti', 'class' => 'form-control']) !!}
 
             <!-- Input Ci -->
 
-            {!! Form::label('ci_pacient', 'Cedula de Identidad', ['class' => 'control-label']) !!}
-            {!! Form::text('ci_pacient', null, ['placeholder' =>  'Ej: V-24.409.499', 'class' => 'form-control']) !!}
+            {!! Form::label('ci', 'Cedula de Identidad', ['class' => 'control-label']) !!}
+            {!! Form::text('ci', null, ['placeholder' =>  'Ej: V-24.409.499', 'class' => 'form-control']) !!}
 
             <!-- Input Phone -->
 
-            {!! Form::label('phone_pacient', 'Telefono', ['class' => 'control-label']) !!}
-            {!! Form::text('phone_pacient', null, ['placeholder' => 'Ej: 04262766415', 'class' => 'form-control']) !!}
+            {!! Form::label('phone', 'Telefono', ['class' => 'control-label']) !!}
+            {!! Form::text('phone', null, ['placeholder' => 'Ej: 04262766415', 'class' => 'form-control']) !!}
+
+            <!-- Input Phone -->
+
+            {!! Form::label('phone2', 'Telefono 2', ['class' => 'control-label']) !!}
+            {!! Form::text('phone2', null, ['placeholder' => 'Ej: 04262766415', 'class' => 'form-control']) !!}
+
+            <!-- Input Address -->
+            {!! Form::label('address', 'Direccion', ['class' => 'control-label']) !!}
+            {!! Form::text('address', null, ['placeholder' => 'Ej: Calle Colon', 'class' => 'form-control']) !!}
+
+            <!-- Input Phone -->
+
+            {!! Form::label('email', 'Correo Electronico', ['class' => 'control-label']) !!}
+            {!! Form::email('email', null, ['placeholder' => 'Ej: tplaza15@gmail.com', 'class' => 'form-control']) !!}
 
             <!-- Input Sex -->
             {!! Form::label('sex', 'Sexo', ['class' => 'control-label']) !!}
@@ -51,12 +65,7 @@
 
             <!-- Input Birth Date -->
             {!! Form::label('birth_date', 'Fecha de Nacimiento', ['class' => 'control-label']) !!}
-            <div class="input-group date" data-provide="datepicker">
-              <input type="text" class="form-control">
-              <div class="input-group-addon">
-                  <span class="glyphicon glyphicon-th"></span>
-              </div>
-            </div>
+            {!! Form::text('birth_date', null, ['class' => 'form-control', 'id' => 'datepicker'])!!}
             <br>
           {!! Form::submit('Registar Paciente', ['class' => 'btn btn-primary']) !!}
             
@@ -73,11 +82,13 @@
 @section('scripts')
   
   <script type="text/javascript">
-    $('.datepicker').datepicker({
-      format: 'yyyy/mm/dd',
-      startDate: '-3d'
-    });
+      $(function() 
+      {
+        $("#datepicker").datepicker();
+      });
+
   </script>
+
 
 @endsection
 

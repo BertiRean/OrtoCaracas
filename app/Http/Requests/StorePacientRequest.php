@@ -24,8 +24,8 @@ class StorePacientRequest extends Request
     public function rules()
     {
         return [
-            'name_pacient' => 'required',
-            'ci_pacient' => 'required|unique:pacient',
+            'name' => 'required',
+            'ci' => 'required|unique:pacients',
             'sex' => 'required',
             'phone' => 'required',
             'email' => 'required',
