@@ -66,7 +66,23 @@
   <script type="text/javascript">
     $(document).ready(function() 
     {
-      $('#data').DataTable();
+      $('#data').DataTable(
+        {
+          "language" : {
+            "emptyTable": "No Hay Pacientes Registrados",
+            "paginate" : {
+              "first": "Inicio",
+              "previous": "Anterior",
+              "next": "Siguiente",
+              "last": "Ultima"
+            },
+            "infoEmpty": "Mostrando 0 de 0 Pacientes Totales",
+            "info": "Mostrando _START_ de _TOTAL_ Pacientes",
+            "lengthMenu" : "Mostrar _MENU_ Pacientes",
+            "search": "Busqueda:",
+            "zeroRecords":    "No se han encontrado resultados",
+          }
+        });
     });
   </script>
   
