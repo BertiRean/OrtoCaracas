@@ -25,10 +25,10 @@ class StorePacientRequest extends Request
     {
         return [
             'name_pacient' => 'required',
-            'ci_pacient' => 'required|unique:Pacient',
-            'birth_date' => 'date',
-            'phone_pacient' => 'required',
-            'sex' => 'required'
+            'ci_pacient' => 'required|unique:pacient',
+            'sex' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
         ];
     }
 }

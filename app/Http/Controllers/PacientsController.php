@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Pacient;
+use App\Contact;
 use App\Http\Requests\StorePacientRequest;
 
 class PacientsController extends Controller
@@ -17,13 +18,13 @@ class PacientsController extends Controller
      */
     public function index()
     {
-        $pacients = Pacient::all();
+        $pacients = Pacient::paginate(10);
 
         $data = [
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Edad"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
           'pacients' => $pacients,
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
@@ -46,6 +47,7 @@ class PacientsController extends Controller
         return view('admin.pacient.create', $data);
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -54,13 +56,29 @@ class PacientsController extends Controller
      */
     public function store(StorePacientRequest $request)
     {
-        $pacient = Pacient::create($request->all());
+        
+        $pacient = new Pacient;
+        $contact = new Contact;
+
+        $pacient->name_pacient = $request->name_pacient;
+        $pacient->ci_pacient = $request->ci_pacient;
+        $pacient->sex = $request->sex;
+        $pacient->birth_date = $request->birth_date;
+
+        $contact->phone = $request->phone;
+        $contact->email = $request->email;
+        $contact->save();
+
+        $pacient->contact_id = $contact->idcontact;
+
+        $pacient->save();
+
 
         $data = [
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Edad"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
           'pacients' => Pacient::all(),
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
@@ -114,13 +132,17 @@ class PacientsController extends Controller
 
         $pacient->delete();
 
+        $contact = Contact::find($pacient->contact_id);
+
+        $contact->delete();
+
         $pacients = Pacient::all();
 
         $data = [
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Edad"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono", "Sexo", "Email", "Acciones"),
           'pacients' => $pacients,
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
