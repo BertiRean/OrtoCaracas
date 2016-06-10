@@ -1,28 +1,32 @@
 <?php
 
-namespace App/Doctor;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Doctor extends Model {
 
-	protected $table = 'doctor';
+	protected $table = 'doctors';
+
 	public $timestamps = false;
-	protected $fillable = array('name', 'ci', 'email', 'spec_id');
+	
+	protected $fillable = array('name', 'ci', 'bank_account', 'contact_id');
 
-	public function specialitys()
-	{
-		return $this->belongsToMany('Speciality', 'id');
+	protected $primaryKey = "id_doctor";
+
+	public function specs()
+	{	
+		return $this->belongsToMany('App\Speciality', 'doctor_specs', 'doctor_id', 'spec_id');
 	}
 
-	public function doctor_dates()
+	public function contact()
 	{
-		return $this->hasMany('Dates', 'doctor_id');
+		return $this->hasOne('App\Contact', 'id_contact', 'contact_id');
 	}
 
-	public function doctor_consults()
+	public function phones()
 	{
-		return $this->hasMany('Consult', 'doctor_id');
+		return $this->hasMany('App\Phone', 'contact_id', 'contact_id');
 	}
 
 }

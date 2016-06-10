@@ -23,6 +23,7 @@ class CreateDoctorsTable extends Migration
             $table->string('ci', 16)->unique()->default("");
             $table->string('bank_account', 20)->default("");
             $table->integer('contact_id')->unsigned();
+            $table->boolean('status');
         });
     }
 

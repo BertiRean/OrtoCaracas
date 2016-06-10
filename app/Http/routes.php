@@ -17,5 +17,6 @@ Route::get('/', 'AdminController@getIndex');
 Route::group(['prefix' => 'admin'], function()
 {
 	Route::resource('pacient', 'PacientsController');
+	Route::resource('doctor', 'DoctorsController');
 });
 
