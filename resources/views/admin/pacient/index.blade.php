@@ -9,6 +9,10 @@
       @include('admin.template.body-header', ['icons' => $icons])
       <!-- End of Body Heading -->
 
+      @if(Session::has('flash_message'))
+        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+      @endif
+
       {{ Html::link('/admin/pacient/create', $button_create, ['class' => 'btn btn-success']) }}
       {{ Html::link('#', $button_delete, ['class' => 'btn btn-danger', 'id' => 'delete']) }}
 
@@ -49,8 +53,8 @@
                             <td>{{ $pacient->contact["email"] }}</td>
                             <td>{{ $pacient->birth_date }}</td>
                             <td>
-                              <a href="#" id="ver"><i class="glyphicon glyphicon-eye-open"></i></a> 
-                              <a href="{{ url('/admin/pacient', [$pacient->idPacient]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?"><i class="glyphicon glyphicon-trash"></i></a>
+                              {!! link_to_route('admin.pacient.edit', $title = 'Editar', $parameters = $pacient->id_pacient, $attributes = ['class' => 'btn btn-primary']) !!}
+                              <a href="{{ url('/admin/pacient', [$pacient->id_pacient]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?"><i class="glyphicon glyphicon-trash"></i></a>
                             </td>
                           </tr>
                         @endforeach

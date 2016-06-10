@@ -19,7 +19,7 @@ class PacientsController extends Controller
      */
     public function index()
     {
-        $pacients = Pacient::paginate(10);
+        $pacients = Pacient::where('status', 1)->paginate(10);
 
         $data = [
           'title_table' => 'Listado de Pacientes',
@@ -33,7 +33,6 @@ class PacientsController extends Controller
         return view('admin.pacient.index', $data);
     }
 
-    
 
     /**
      * Show the form for creating a new resource.
@@ -67,6 +66,7 @@ class PacientsController extends Controller
         $pacient->ci = $request->ci;
         $pacient->sex = $request->sex;
         $pacient->birth_date = $request->birth_date;
+        $pacient->status = true;
 
         $contact->email = $request->email;
         $contact->address = $request->address;
@@ -93,11 +93,11 @@ class PacientsController extends Controller
           'button_create' => 'Crear Paciente',
           'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Fecha de Nacimiento" ,"Acciones"),
 
-          'pacients' => Pacient::all(),
+          'pacients' => Pacient::where('status', 1)->paginate(10),
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
 
-        return redirect()->route('admin.pacient.index', $data);
+        return $this->index();
     }
 
     /**
@@ -108,7 +108,8 @@ class PacientsController extends Controller
      */
     public function show($id)
     {
-        //
+        $pacient = Pacient::findOrFail($id);
+        return view('admin.pacient.show', $pacient);
     }
 
     /**
@@ -119,7 +120,9 @@ class PacientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pacient = Pacient::findOrFail($id);
+
+        return view('admin.pacient.show', ['pacient' => $pacient]);
     }
 
     /**
@@ -131,7 +134,33 @@ class PacientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pacient = Pacient::find($id);
+        $phones = Phone::where('contact_id', $pacient->contact_id)->get();
+        $contact = Contact::find($pacient->contact_id);
+
+        $contact->email = $request->email;
+        $contact->address = $request->address;
+
+        $pacient->name = $request->name;
+        $pacient->ci = $request->ci;
+        $pacient->sex = $request->sex;
+
+        $phones[0]["phone_number"] = $request->phone1;
+        $phones[1]["phone_number"] = $request->phone2;
+
+        foreach ($phones as $phone) {
+          $phone->save();
+        }
+
+        $pacient->save();
+        $contact->save();
+
+        $data = [
+          'icons' => ['fa fa-user' => 'Pacientes', 'fa fa-plus-square-o' => 'Editar Paciente'],
+          'pacient' => $pacient,
+        ];
+
+        return $this->index();
     }
 
     /**
@@ -144,13 +173,9 @@ class PacientsController extends Controller
     {
         $pacient = Pacient::find($id);
 
-        $pacient->delete();
+        $pacient->status = false;
 
-        $contact = Contact::find($pacient->contact_id);
-
-        $contact->delete();
-
-        $pacients = Pacient::paginate(10);
+        $pacients = Pacient::where('status', 1)->paginate(10);
 
         $data = [
           'title_table' => 'Listado de Pacientes',
