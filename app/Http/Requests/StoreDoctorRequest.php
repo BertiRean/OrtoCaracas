@@ -25,7 +25,7 @@ class StoreDoctorRequest extends Request
     {
         return [
             'name' => 'required',
-            'ci' => 'required|unique:pacients',
+            'ci' => 'required|unique:doctors',
             'bank_account' => 'required|unique:doctors|max:20',
             'phone' => 'required',
             'email' => 'required',

@@ -9,6 +9,7 @@ use App\Pacient;
 use App\Contact;
 use App\Phone;
 use App\Http\Requests\StorePacientRequest;
+use Laracasts\Flash\Flash;
 
 class PacientsController extends Controller
 {
@@ -66,7 +67,7 @@ class PacientsController extends Controller
         $pacient->ci = $request->ci;
         $pacient->sex = $request->sex;
         $pacient->birth_date = $request->birth_date;
-        $pacient->status = true;
+        $pacient->status = 1;
 
         $contact->email = $request->email;
         $contact->address = $request->address;
@@ -96,6 +97,8 @@ class PacientsController extends Controller
           'pacients' => Pacient::where('status', 1)->paginate(10),
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
+
+        Flash::success('Registro Exitoso del Paciente: '. '$pacient->name');
 
         return $this->index();
     }
@@ -173,7 +176,8 @@ class PacientsController extends Controller
     {
         $pacient = Pacient::find($id);
 
-        $pacient->status = false;
+        $pacient->status = 0;
+        $pacient->save();
 
         $pacients = Pacient::where('status', 1)->paginate(10);
 
@@ -187,6 +191,8 @@ class PacientsController extends Controller
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
 
-        return view('admin.pacient.index', $data);
+        Flash::error("Se ha eliminado el paciente: " . $pacient->name);
+
+        return $this->index();
     }
 }

@@ -11,6 +11,9 @@ use App\Phone;
 use App\Doctor_Speciality;
 use App\Contact;
 use App\Http\Requests\StoreDoctorRequest;
+use Validator;
+use DB;
+use Laracasts\Flash\Flash;
 
 
 class DoctorsController extends Controller
@@ -121,9 +124,15 @@ class DoctorsController extends Controller
      */
     public function edit($id)
     {
-        //
         $doctor = Doctor::findOrFail($id);
-        return view('admin.pacient.show', $pacient);
+        $specs = Speciality::all();
+        $specialities = array();
+        foreach ($specs as $spec) 
+        {
+          $specialities[$spec->id_speciality] = $spec->name;
+        }
+
+        return view('admin.doctor.edit', ['doctor' => $doctor, 'specialities' => $specialities]);
     }
 
     /**
@@ -135,7 +144,69 @@ class DoctorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $doctor = Doctor::findOrFail($id);
+
+      $rules = [
+            'name' => 'required',
+            'ci' => 'required|unique:doctors,ci,'.$doctor->id_doctor . ',id_doctor',
+            'bank_account' => 'required|unique:doctors,bank_account,'.$doctor->id_doctor . ',id_doctor',
+            'email' => 'required',
+            'phone1' => 'required',
+            'address' => 'required',
+        ];
+
+     $messages =[
+            'name.required' => 'El Nombre no puede dejarse en blanco',
+            'ci.required'  => 'La cedula no puede dejarse en blanco',
+            'phone1.required' => 'Debe al menos colocar 1 telefono',
+            'email.required' => 'Es obligatorio una direccion de email',
+            'address.required' => 'La Direccion no puede dejarse en blanco',
+            'ci.unique' => 'El Doctor ya se encuentra registrado en la base de datos',
+            'speciality.required' => 'Debe Seleccionar al menos una specialidad',
+            'bank_account.required' => 'Debe colocar la cuenta bancaria del doctor',
+            'bank_account.max' => 'La Cuenta no debe tener mas de 20 numeros',
+            'bank_account.unique' => 'La Cuenta Bancaria ya se encuentra asociada a un doctor'
+        ];
+
+      $validator = Validator::make($request->all(), $rules, $messages);
+
+      if($validator->fails())
+      {
+        return redirect()->back()->withErrors($validator->errors());
+      }
+      else
+      {
+        $doctor->name = $request->name;
+        $doctor->ci = $request->ci;
+        $doctor->bank_account = $request->bank_account;
+        $doctor->save();
+
+        $phones = $doctor->phones;
+
+        $phones[0]["phone_number"] = $request->phone1;
+
+        if(!is_null($request->phone2))
+        {
+          $phone[1]["phone_number"] = $request->phone2;
+        }
+
+        foreach ($phones as $phone)
+          $phone->save();
+
+        $contact = $doctor->contact;
+        $contact["email"] = $request->email;
+        $contact["address"] = $request->address;
+        $contact->save();
+
+
+        $specs = $doctor->specs;
+
+        Db::table('doctor_specs')->where('doctor_id', $doctor->id_doctor)->update(['spec_id' => $request->speciality1]);
+
+        Flash::success('Se han actualizado correctamente los datos del Doctor: '. $doctor->name);
+
+        return $this->index();
+      }
     }
 
     /**
@@ -151,6 +222,8 @@ class DoctorsController extends Controller
         $doctor->status = 0;
         $doctor->bank_account = "";
         $doctor->save();
+
+        Flash::error('Se ha eliminado a el Doctor: '. $doctor->name);
 
         return $this->index();    
       }
