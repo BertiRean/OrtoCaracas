@@ -16,7 +16,12 @@ Route::get('/', 'AdminController@getIndex');
 
 Route::group(['prefix' => 'admin'], function()
 {
+	Route::get('/', 'AdminController@getIndex');
 	Route::resource('pacient', 'PacientsController');
 	Route::resource('doctor', 'DoctorsController');
+	Route::resource('dates', 'DatesController');
+
+	Route::get('orto', 'DoctorsController@orto_general');
+	Route::get('specs', 'DoctorsController@specialits');
 });
 

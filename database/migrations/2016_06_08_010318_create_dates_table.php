@@ -16,6 +16,7 @@ class CreateDatesTable extends Migration
         
         Schema::create('dates', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->increments('date_id');
             $table->integer('doctor_id')->unsigned();
             $table->integer('pacient_id')->unsigned();
             $table->timestamp('date_consult');
