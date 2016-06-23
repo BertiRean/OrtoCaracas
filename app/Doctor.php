@@ -29,4 +29,9 @@ class Doctor extends Model {
 		return $this->hasMany('App\Phone', 'contact_id', 'contact_id');
 	}
 
+	public function dates()
+	{
+		return $this->hasMany('App\Dates', 'id_doctor', 'doctor_id');
+	}
+
 }
