@@ -39,10 +39,6 @@
     {!! Form::select('speciality', $specs, null, ['class' => 'form-control']) !!}
 
     <br>
-    {!! Form::button('Añadir Especialidad', ['class' => 'btn - btn-primary', 'id' => 'add'])!!}
-    <br>
-
-    <br>
 {!! Form::submit('Registar Doctor', ['class' => 'btn btn-primary'] ) !!}
 
             
