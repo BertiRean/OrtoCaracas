@@ -14,6 +14,8 @@ class Pacient extends Model
 
     protected $fillable = ['name', 'ci', 'sex', 'birth_date', 'contact_id'];
 
+    protected $dates = ['birth_date'];
+
     public function contact()
     {
     	return $this->hasOne('App\Contact', 'id_contact', 'contact_id');

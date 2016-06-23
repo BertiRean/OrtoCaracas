@@ -50,7 +50,7 @@
                                 @endif
                             </td>
                             <td>{{ $pacient->contact["email"] }}</td>
-                            <td>{{ $pacient->birth_date }}</td>
+                            <td>{{ $pacient->birth_date->format('d-m-Y') }}</td>
                             <td>
                               {!! link_to_route('admin.pacient.edit', $title = 'Editar', $parameters = $pacient->id_pacient, $attributes = ['class' => 'btn btn-primary']) !!}
                               <a href="{{ url('/admin/pacient', [$pacient->id_pacient]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?" class="btn btn-danger">Eliminar</a>

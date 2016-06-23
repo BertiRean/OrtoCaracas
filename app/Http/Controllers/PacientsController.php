@@ -10,6 +10,7 @@ use App\Contact;
 use App\Phone;
 use App\Http\Requests\StorePacientRequest;
 use Laracasts\Flash\Flash;
+use Carbon\Carbon;
 
 class PacientsController extends Controller
 {
@@ -63,10 +64,12 @@ class PacientsController extends Controller
         $phone = new Phone;
         $phone2 = new Phone;
 
+
+
         $pacient->name = $request->name;
         $pacient->ci = $request->ci;
         $pacient->sex = $request->sex;
-        $pacient->birth_date = $request->birth_date;
+        $pacient->birth_date = Carbon::createFromFormat('d/m/Y', $request->birth_date);
         $pacient->status = 1;
 
         $contact->email = $request->email;
@@ -98,7 +101,7 @@ class PacientsController extends Controller
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
 
-        Flash::success('Registro Exitoso del Paciente: '. '$pacient->name');
+        Flash::success('Registro Exitoso del Paciente: '. $pacient->name);
 
         return $this->index();
     }
