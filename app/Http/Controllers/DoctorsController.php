@@ -39,6 +39,63 @@ class DoctorsController extends Controller
         return view('admin.doctor.index', $data);
     }
 
+    public function orto_general()
+    {
+        $dentits = DB::table('doctor_specs')
+        ->where('spec_id', 1)
+        ->get();
+
+
+        $ids = array();
+
+        foreach ($dentits as $doctor)
+        {
+            $ids[] = $doctor->doctor_id;
+        }
+
+        $doctors = Doctor::where('id_doctor', $ids)->paginate(10);
+
+        $data = [
+          'title_table' => 'Listado de Doctores',
+          'button_delete' => 'Eliminar Doctor',
+          'button_create' => 'Registrar Doctor',
+          'model_labels' => array("Nombre", "Cedula", "Especialidad","Telefono 1", "Telefono 2", "Direccion", "Cuenta Bancaria", "Email" ,"Acciones"),
+          'doctors' => $doctors,
+          'icons' => ['fa fa-user-md' => 'Doctores']
+        ];
+
+        return view('admin.doctor.index', $data);
+    }
+
+    public function specialits()
+    {
+        $dentits = DB::table('doctor_specs')
+        ->where('spec_id', '!=' , 1)
+        ->get();
+
+
+        $ids = array();
+
+        foreach ($dentits as $doctor)
+        {
+            $ids[] = $doctor->doctor_id;
+        }
+
+        $doctors = Doctor::where('id_doctor', $ids)->paginate(10);
+
+        $data = [
+          'title_table' => 'Listado de Doctores',
+          'button_delete' => 'Eliminar Doctor',
+          'button_create' => 'Registrar Doctor',
+          'model_labels' => array("Nombre", "Cedula", "Especialidad","Telefono 1", "Telefono 2", "Direccion", "Cuenta Bancaria", "Email" ,"Acciones"),
+          'doctors' => $doctors,
+          'icons' => ['fa fa-user-md' => 'Doctores']
+        ];
+
+        return view('admin.doctor.index', $data);
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
