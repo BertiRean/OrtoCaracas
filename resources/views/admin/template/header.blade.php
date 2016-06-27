@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                {!! Html::link('index.html' , 'Panel de Administracion', array('class' => 'navbar-brand')) !!}
+                {!! Html::link('/' , 'Panel de Administracion', array('class' => 'navbar-brand')) !!}
             
             </div>
             <!-- Top Menu Items -->
@@ -47,10 +47,35 @@
                         <a href="/"><i class="fa fa-fw fa fa-calendar"></i> Citas</a>
                     </li>
                     <li>
-                        <a href="/admin/doctor"><i class="fa fa-fw fa fa-user-md"></i> Doctores</a>
+                        <a href="#"><i class= "fa fa-fw fa-user-md"></i>Odontologos</a>
                     </li>
                     <li>
-                        <a href="/"><i class="fa fa-fw fa fa-file-text"></i> Examenes</a>
+                        <a href="#"><i class= "fa fa-fw fa-user-md"></i>Especialistas</a>
+                    </li>
+                    <li>
+                    </li>
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa fa-file-text"></i> Radiologia <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Radiografia Odontologica</a>
+                            </li>
+                            <li>
+                                <a href="#">Radiologia Medica</a>
+                            </li>
+                            <li>
+                                <a href = "#">Mamografia</a>
+                            </li>
+
+                            <li>
+                                <a href = "#">Ecosonografia</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/"><i class="fa fa-fw fa fa-flask"></i> Laboratorio Clinico</a>
                     </li>
                 </ul>
             </div>
