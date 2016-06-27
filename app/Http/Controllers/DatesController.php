@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Dates;
 use App\Pacient;
+use App\Doctor;
+use App\Http\Requests\StoreDateRequest;
 
 class DatesController extends Controller
 {
@@ -36,9 +38,24 @@ class DatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return $this->find_pacient();
+        $pacient = Pacient::find($id);
+        $doctors = Doctor::all();
+
+
+        $doctor_array = array();
+
+        foreach ($doctors as $doctor ) {
+          $doctor_array[$doctor->id_doctor] = $doctor->name;
+        }
+
+        $data = [
+          'doctors' => $doctor_array,
+          'pacient' => $pacient,
+          'icons' => ['fa fa-user-md' => 'Citas', 'fa fa-plus-square-o' => 'Registro de Citas']
+        ];
+        return view('admin.dates.create', $data);
     }
 
     public function find_pacient()
@@ -61,9 +78,9 @@ class DatesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreDateRequest $request)
     {
-        //
+        
     }
 
     /**
