@@ -15,6 +15,8 @@
       <div class="row">
         <div class="col-lg-6">
 
+        @include('flash::message')
+
         @if(count($errors) > 0)
           <div class="alert alert-danger" role = "alert">
             <ul>

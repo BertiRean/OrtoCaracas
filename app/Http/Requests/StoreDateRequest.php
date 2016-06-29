@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class DatesRequest extends Request
+class StoreDateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DatesRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class DatesRequest extends Request
     public function rules()
     {
         return [
-            //
+            'doctor' => 'required',
+            'consult_date' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'doctor.required' => 'Debe seleccionar un Doctor',
+            'ci.required'  => 'No Puede dejar vacia la fecha',
         ];
     }
 }

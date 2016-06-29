@@ -9,6 +9,9 @@ use App\Dates;
 use App\Pacient;
 use App\Doctor;
 use App\Http\Requests\StoreDateRequest;
+use Carbon\Carbon;
+use Laracasts\Flash\Flash;
+
 
 class DatesController extends Controller
 {
@@ -80,7 +83,48 @@ class DatesController extends Controller
      */
     public function store(StoreDateRequest $request)
     {
-        
+      $date = new Dates;
+      $doctor = Doctor::find($request->doctor);
+      $pacient = Pacient::find($request->pacient_id);
+      $flag_spec = false;
+
+      $date->doctor_id = $doctor->id_doctor;
+      $date->pacient_id = $pacient->id_pacient;
+      $date->date_consult = Carbon::createFromFormat('d/m/Y', $request->consult_date);
+
+
+      foreach ($doctor->specs as $spec) 
+      {
+        if($spec['id_speciality'] == 2)
+        {
+            $flag_spec = true;
+            break;
+        }
+      }
+
+      if($flag_spec == true)
+      {
+        $month = Carbon::createFromFormat('d/m/Y', $request->consult_date);
+
+        $dates_count = Dates::where('pacient_id', '=', $pacient->id_pacient)
+        ->where('doctor_id', '=', $doctor->id_doctor)
+        ->whereDay('date_consult', '=', $month->day)
+        ->count();
+
+        if($dates_count > 0)
+        {
+          Flash::error('No Puede haber mas de una cita por mes con el Odontologo');
+          return $this->create($pacient->id_pacient);
+        }
+        else
+          $date->save();
+      }
+      else
+        $date->save();
+
+      Flash::success('Cita Creada Exitosamente:');
+
+      return $this->index();
     }
 
     /**

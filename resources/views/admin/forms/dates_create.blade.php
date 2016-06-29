@@ -20,6 +20,9 @@
     {!! Form::label('consult_date', 'Fecha de Cita', ['class' => 'control-label']) !!}
     {!! Form::text('consult_date', null, ['class' => 'form-control', 'id' => 'datepicker'])!!}
 
+
+    {!! Form::hidden('pacient_id', $pacient->id_pacient)!!}
+
     <br>
 {!! Form::submit('Registrar Cita', ['class' => 'btn btn-primary'] ) !!}
 
