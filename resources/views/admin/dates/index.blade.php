@@ -30,12 +30,12 @@
                     <tbody>
                         @foreach($dates as $date)
                           <tr>
-                            <td>{{$date->doctor["name"]}}</td>
+                            <td>{{$date->doctor["name"] . " - " . $date->doctor->specs[0]['name']}}</td>
                             <td>{{$date->pacient["name"]}}</td>
-                            <td>{{$date->date_consult}}</td>
+                            <td>{{$date->date_consult->format('d/m/Y')}}</td>
                             <td>
-                              {!! link_to_route('admin.dates.edit', $title = 'Editar', $parameters = $date->id_date, $attributes = ['class' => 'btn btn-primary']) !!}
-                              <a href="{{ url('/admin/dates', [$date->id_date]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?" class="btn btn-danger">Eliminar</a>
+                              {!! link_to_route('admin.dates.edit', $title = 'Editar', $parameters = $date->date_id, $attributes = ['class' => 'btn btn-primary']) !!}
+                              <a href="{{ url('/admin/dates', [$date->date_id]) }}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="Esta Seguro?" class="btn btn-danger">Eliminar</a>
                             </td>
                           </tr>
                         @endforeach

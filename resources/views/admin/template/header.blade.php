@@ -44,7 +44,7 @@
                         <a href="/admin/pacient"><i class="fa fa-fw fa fa-user"></i> Pacientes</a>
                     </li>
                     <li>
-                        <a href="/"><i class="fa fa-fw fa fa-calendar"></i> Citas</a>
+                        <a href="/admin/dates"><i class="fa fa-fw fa fa-calendar"></i> Citas</a>
                     </li>
                     <li>
                         <a href="#"><i class= "fa fa-fw fa-user-md"></i>Odontologos</a>

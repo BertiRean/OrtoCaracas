@@ -1,6 +1,6 @@
 @extends('admin.template.main')
 
-@section('tittle', 'Registro de Doctores')
+@section('tittle', 'Editar Cita')
 
 
 @section('container')
@@ -10,6 +10,8 @@
   <div id="page-wrapper">
     <div class="container-fluid">
       <!-- Page Body Heading -->
+      <?php $icons = ['fa fa-calendar' => 'Citas', 'fa fa-plus-square-o' => 'Editar Cita'] ?>
+
       @include('admin.template.body-header', ['icons' => $icons])
       <!-- End of Body Heading -->
       <div class="row">
@@ -27,8 +29,8 @@
           </div>
 
         @endif
-
-          @include('admin.forms.dates_create');
+          <?php $data = ['date' => $date, 'doctors' => $doctors, 'default_doctor' => $date->doctor['name']] ?>
+          @include('admin.forms.dates_edit', $data);
 
         </div>
       </div>
