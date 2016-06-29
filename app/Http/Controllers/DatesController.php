@@ -10,6 +10,7 @@ use App\Pacient;
 use App\Doctor;
 use App\Http\Requests\StoreDateRequest;
 use Carbon\Carbon;
+use Validator;
 use Laracasts\Flash\Flash;
 
 
@@ -50,7 +51,7 @@ class DatesController extends Controller
         $doctor_array = array();
 
         foreach ($doctors as $doctor ) {
-          $doctor_array[$doctor->id_doctor] = $doctor->name;
+          $doctor_array[$doctor->id_doctor] = $doctor->name . " - " . $doctor->specs[0]['name'];
         }
 
         $data = [
@@ -92,7 +93,6 @@ class DatesController extends Controller
       $date->pacient_id = $pacient->id_pacient;
       $date->date_consult = Carbon::createFromFormat('d/m/Y', $request->consult_date);
 
-
       foreach ($doctor->specs as $spec) 
       {
         if($spec['id_speciality'] == 2)
@@ -108,12 +108,12 @@ class DatesController extends Controller
 
         $dates_count = Dates::where('pacient_id', '=', $pacient->id_pacient)
         ->where('doctor_id', '=', $doctor->id_doctor)
-        ->whereDay('date_consult', '=', $month->day)
+        ->whereMonth('date_consult', '=', $month->month)
         ->count();
 
         if($dates_count > 0)
         {
-          Flash::error('No Puede haber mas de una cita por mes con el Odontologo');
+          Flash::error('No Puede haber mas de una cita por mes con el Ortodoncista');
           return $this->create($pacient->id_pacient);
         }
         else
@@ -147,6 +147,23 @@ class DatesController extends Controller
     public function edit($id)
     {
         //
+        $date = Dates::find($id);
+
+        $doctors = Doctor::all();
+
+
+        $doctor_array = array();
+
+        foreach ($doctors as $doctor ) {
+          $doctor_array[$doctor->id_doctor] = $doctor->name;
+        }
+
+        $data = [
+          'doctors' => $doctor_array,
+          'date' => $date
+        ];
+
+        return view('admin.dates.edit', $data);
     }
 
     /**
@@ -159,6 +176,59 @@ class DatesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $messages = [
+            'doctor.required' => 'Debe seleccionar un Doctor',
+            'consult_date.required'  => 'No Puede dejar vacia la fecha',
+        ];
+
+        $rules = [
+            'doctor' => 'required',
+            'consult_date' => 'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if($validator->fails())
+          return redirect()->back()->withErrors($validator->errors);
+        else
+        {
+          $doctor = Doctor::find($request->doctor);
+          $date = Dates::find($id);
+          $date->date_consult = Carbon::createFromFormat('d/m/Y', $request->consult_date);
+          $flag_spec = false;
+
+          foreach ($doctor->specs as $spec) 
+          {
+            if($spec['id_speciality'] == 2)
+            {
+                $flag_spec = true;
+                break;
+            }
+          }
+
+          if($flag_spec == true)
+          {
+            $month = Carbon::createFromFormat('d/m/Y', $request->consult_date);
+
+            $dates_count = Dates::where('pacient_id', '=', $pacient->id_pacient)
+            ->where('doctor_id', '=', $doctor->id_doctor)
+            ->whereMonth('date_consult', '=', $month->month)
+            ->count();
+
+            if($dates_count > 0)
+            {
+              Flash::error('No Puede haber mas de una cita por mes con el Ortodoncista');
+              return $this->create($pacient->id_pacient);
+            }
+            else
+              $date->save();
+          }
+          $date->save();
+
+          Flash::success('Se han actualizado correctamente los datos');
+          return $this->index();
+        }
+
     }
 
     /**
@@ -169,6 +239,12 @@ class DatesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $date = Dates::find($id);
+
+        $date->delete();
+
+        Flash::error('La Cita se ha eliminado correctamente');
+
+        return $this->index();
     }
 }

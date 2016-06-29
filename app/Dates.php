@@ -9,7 +9,9 @@ class Dates extends Model {
 	protected $table = 'dates';
 	public $timestamps = false;
 	protected $fillable = ['doctor_id', 'pacient_id', 'date_consult'];
-	public $primaryKey = 'id_date';
+	public $primaryKey = 'date_id';
+
+	protected $dates = ['date_consult'];
 
 	public function doctor()
 	{
