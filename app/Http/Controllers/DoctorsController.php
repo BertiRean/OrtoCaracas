@@ -41,10 +41,7 @@ class DoctorsController extends Controller
 
     public function orto_general()
     {
-        $dentits = DB::table('doctor_specs')
-        ->where('spec_id', 1)
-        ->get();
-
+        $dentits = Doctor_Speciality::where('spec_id', '=', 1)->get();
 
         $ids = array();
 
@@ -53,7 +50,9 @@ class DoctorsController extends Controller
             $ids[] = $doctor->doctor_id;
         }
 
-        $doctors = Doctor::where('id_doctor', $ids)->paginate(10);
+        $doctors = Doctor::whereIn('id_doctor', $ids)
+                  ->where('status', 1)
+                  ->paginate(10);
 
         $data = [
           'title_table' => 'Listado de Doctores',
@@ -69,9 +68,7 @@ class DoctorsController extends Controller
 
     public function specialits()
     {
-        $dentits = DB::table('doctor_specs')
-        ->where('spec_id', '!=' , 1)
-        ->get();
+        $dentits = Doctor_Speciality::where('spec_id', '<>', 1)->get();
 
 
         $ids = array();
@@ -81,7 +78,8 @@ class DoctorsController extends Controller
             $ids[] = $doctor->doctor_id;
         }
 
-        $doctors = Doctor::where('id_doctor', $ids)->paginate(10);
+        $doctors = Doctor::whereIn('id_doctor', $ids)
+                  ->where('status', 1)->paginate(10);
 
         $data = [
           'title_table' => 'Listado de Doctores',
