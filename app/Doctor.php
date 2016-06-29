@@ -31,7 +31,6 @@ class Doctor extends Model {
 
 	public function dates()
 	{
-		return $this->hasMany('App\Dates', 'id_doctor', 'doctor_id');
+		return $this->hasMany('App\Dates', 'doctor_id', 'id_doctor');
 	}
-
 }
