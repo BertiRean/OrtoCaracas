@@ -47,10 +47,10 @@
                         <a href="/admin/dates"><i class="fa fa-fw fa fa-calendar"></i> Citas</a>
                     </li>
                     <li>
-                        <a href="#"><i class= "fa fa-fw fa-user-md"></i>Odontologos</a>
+                        <a href="/admin/odon"><i class= "fa fa-fw fa-user-md"></i>Odontologos</a>
                     </li>
                     <li>
-                        <a href="#"><i class= "fa fa-fw fa-user-md"></i>Especialistas</a>
+                        <a href="/admin/specs"><i class= "fa fa-fw fa-user-md"></i>Especialistas</a>
                     </li>
                     <li>
                     </li>
@@ -59,23 +59,23 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa fa-file-text"></i> Radiologia <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Radiografia Odontologica</a>
+                                <a href="/admin/rad-odon">Radiografia Odontologica</a>
                             </li>
                             <li>
-                                <a href="#">Radiologia Medica</a>
+                                <a href="/admin/rad-med">Radiologia Medica</a>
                             </li>
                             <li>
-                                <a href = "#">Mamografia</a>
+                                <a href = "/admin/mamography">Mamografia</a>
                             </li>
 
                             <li>
-                                <a href = "#">Ecosonografia</a>
+                                <a href = "/admin/eco">Ecosonografia</a>
                             </li>
                         </ul>
                     </li>
 
                     <li>
-                        <a href="/"><i class="fa fa-fw fa fa-flask"></i> Laboratorio Clinico</a>
+                        <a href="/admin/lab"><i class="fa fa-fw fa fa-flask"></i> Laboratorio Clinico</a>
                     </li>
                 </ul>
             </div>
