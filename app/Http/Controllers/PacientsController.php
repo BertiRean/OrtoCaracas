@@ -27,7 +27,7 @@ class PacientsController extends Controller
           'title_table' => 'Listado de Pacientes',
           'button_delete' => 'Eliminar Paciente',
           'button_create' => 'Crear Paciente',
-          'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Fecha de Nacimiento" ,"Acciones"),
+          'model_labels' => array("Nombre", "Cedula", "Telefono 1", "Telefono 2", "Direccion", "Sexo", "Email", "Fecha de Nacimiento" ,"Cumpleaños", 'Acciones'),
           'pacients' => $pacients,
           'icons' => ['fa fa-user' => 'Pacientes']
         ];
@@ -69,6 +69,7 @@ class PacientsController extends Controller
         $pacient->name = $request->name;
         $pacient->ci = $request->ci;
         $pacient->sex = $request->sex;
+
         $pacient->birth_date = Carbon::createFromFormat('d/m/Y', $request->birth_date);
         $pacient->status = 1;
 

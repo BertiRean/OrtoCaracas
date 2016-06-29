@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Pacient extends Model
 {
@@ -29,6 +30,15 @@ class Pacient extends Model
     public function dates()
     {
         return $this->hasMany('App\Dates', 'pacient_id', 'id_pacient');
+    }
+
+    public function is_birthday()
+    {
+        $actual_date = date('d-m');
+        if($this->birth_date->format('d-m') == $actual_date)
+            return true;
+        else
+            return false;
     }
     
 }
