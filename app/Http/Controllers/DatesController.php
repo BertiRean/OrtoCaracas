@@ -62,20 +62,6 @@ class DatesController extends Controller
         return view('admin.dates.create', $data);
     }
 
-    public function find_pacient()
-    {
-        $pacient = Pacient::paginate(10);
-
-        $data = [
-          'title_table' => 'Listado de Pacientes',
-          'model_labels' => ['Paciente', 'Cedula', 'Accion'],
-          'pacients' => $pacient,
-          'icons' => ['fa fa-calendar' => 'Citas']
-        ];
-
-        return view('admin.dates.pacient_find', $data);
-    }
-
     /**
      * Store a newly created resource in storage.
      *

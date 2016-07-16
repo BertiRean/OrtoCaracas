@@ -17,6 +17,11 @@ class Pacient extends Model
 
     protected $dates = ['birth_date'];
 
+    public function exams()
+    {
+        return $this->hasMany('App\Exam', 'pacient_id', 'id_pacient');
+    }
+
     public function contact()
     {
     	return $this->hasOne('App\Contact', 'id_contact', 'contact_id');

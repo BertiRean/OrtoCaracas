@@ -77,6 +77,15 @@
                     <li>
                         <a href="/admin/lab"><i class="fa fa-fw fa fa-flask"></i> Laboratorio Clinico</a>
                     </li>
+                    <li>
+                        <a href="/admin/earnings"><i class="fa fa-fw fa fa-credit-card"></i> Ingresos</a>
+                    </li>
+                    <li>
+                        <a href="/admin/expenses"><i class="fa fa-fw fa fa-line-chart"></i> Egresos</a>
+                    </li>
+                    <li>
+                        <a href="/admin/consults"><i class="glyphicon glyphicon-check"></i> Consultas</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

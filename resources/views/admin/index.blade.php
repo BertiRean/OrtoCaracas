@@ -70,7 +70,7 @@
 
                 {{-- Bloque de Citas --}}
                 <div class="col-lg-3 col-md-6">
-                    <a href="/admin/rad-orto">
+                    <a href="/admin/rad-odon">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
                             <div class="row">
@@ -233,7 +233,7 @@
 
                 {{-- Bloque de Citas --}}
                 <div class="col-lg-3 col-md-6">
-                    <a href="/admin/ingresos">
+                    <a href="/admin/earnings">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -256,7 +256,7 @@
 
                 {{-- Bloque de Citas --}}
                 <div class="col-lg-3 col-md-6">
-                    <a href="/admin/egresos">
+                    <a href="/admin/expenses">
                     <div class="panel panel-red">
                         <div class="panel-heading">
                             <div class="row">
@@ -275,6 +275,29 @@
                             </div>
                     </div>
                 </div>
+
+                {{-- Bloque de Citas --}}
+                <div class="col-lg-3 col-md-6">
+                    <a href="/admin/consults">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="glyphicon glyphicon-check fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="h4">Consultas</div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel-footer">
+                                <span class="pull-left"></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                    </div>
+                </div>
+                
                 </a>
             </div> 
 

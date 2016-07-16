@@ -12,7 +12,7 @@
       @include('flash::message')
       
 
-      {{ Html::link('/admin/find_pacient', $button_create, ['class' => 'btn btn-success']) }}
+      {{ Html::link('/admin/find_pacient_date', $button_create, ['class' => 'btn btn-success']) }}
       {{ Html::link('#', $button_delete, ['class' => 'btn btn-danger', 'id' => 'delete']) }}
 
       <!-- Table of Data -->

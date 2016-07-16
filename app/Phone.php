@@ -18,5 +18,4 @@ class Phone extends Model
     	return $this->belongsTo('App\Contact', 'contact_id', 'id_contact');
     }
 
-
 }

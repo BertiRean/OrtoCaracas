@@ -14,7 +14,8 @@ class CreateSpecialitiesTable extends Migration
     {
         Schema::dropIfExists('specialities');
 
-        Schema::create('specialities', function (Blueprint $table) {
+        Schema::create('specialities', function (Blueprint $table) 
+        {
             $table->engine = 'InnoDB';
             $table->increments('id_speciality');
             $table->string('name', 128);

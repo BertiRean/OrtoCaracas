@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 use App\Http\Controllers\View;
 
+use App\Pacient;
+
+use App\Department;
+
+
 class AdminController extends Controller
 {
+
     public function getIndex()
     {
     	return view('admin.index');
@@ -52,5 +57,80 @@ class AdminController extends Controller
 		'button_delete' => 'Eliminar Cita');
 
 		return view('admin.template.index-model', $data);
+    }
+
+    public function find_pacient($type, $id)
+    {   
+        $department = Department::find($id);
+        $pacient = Pacient::paginate(10);
+        $icons = array();
+        $link_create;
+        $text_button;
+
+
+        if($type == 'Citas')
+        {
+            $link_create = 'admin.dates.create_date';
+        	$icons['fa fa-calendar'] = $type;
+            $text_button = 'Crear Cita';
+        }
+        if($type == 'Examenes')
+        {
+            $link_create = 'admin.exams.create_exam';
+        	$icons['fa fa-file-o'] = $type;
+            $text_button = 'Crear Examen';
+        }
+        if($type == 'Consultas')
+        {
+            $link_create = 'admin.consults.create_consult';
+            $icons['fa fa-file-o'] = $type;
+            $text_button = 'Crear Consulta';   
+        }
+
+        $data = [
+          'title_table' => 'Listado de Pacientes',
+          'model_labels' => ['Paciente', 'Cedula', 'Accion'],
+          'pacients' => $pacient,
+          'icons' => $icons,
+          'link_model' => $link_create,
+          'button_text_type' => $text_button,
+          'department' => $department
+        ];
+
+        return view('admin.pacient_find', $data);
+    }
+
+    public function find_pacient_date($type)
+    {   
+        $pacient = Pacient::paginate(10);
+        $icons = array();
+        $link_create;
+        $text_button;
+
+
+        if($type == 'Citas')
+        {
+            $link_create = 'admin.dates.create_date';
+            $icons['fa fa-calendar'] = $type;
+            $text_button = 'Crear Cita';
+        }
+        else
+        {
+            $link_create = 'admin.exams.create_exam';
+            $icons['fa fa-file-o'] = $type;
+            $text_button = 'Crear Examen';
+        }
+
+        $data = [
+          'title_table' => 'Listado de Pacientes',
+          'model_labels' => ['Paciente', 'Cedula', 'Accion'],
+          'pacients' => $pacient,
+          'icons' => $icons,
+          'link_model' => $link_create,
+          'button_text_type' => $text_button,
+          'department' => null
+        ];
+
+        return view('admin.pacient_find', $data);
     }
 }

@@ -31,7 +31,7 @@
                     <tbody>
                         @foreach($pacients as $pacient)
                           <tr data-id = "{{ $pacient->id_pacient }}">
-                            <td>{{ $pacient->name}} </td>
+                            <td>{{Html::linkRoute('admin.consults.view_pacient', $pacient->name, ['id' => $pacient->id_pacient]) }}</td>
                             <td>{{ $pacient->ci }}</td>
 
                             <!-- Show Phones -->

@@ -16,10 +16,13 @@ class CreateConsultsTable extends Migration
         
         Schema::create('consults', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->increments('id_consult');
             $table->integer('doctor_id')->unsigned();
             $table->integer('pacient_id')->unsigned();
-            
-            $table->string('description', 256)->default("");
+            $table->timestamp('date_consult');
+            $table->string('description', 512)->default("");
+            $table->string('observations', 128)->default("");   
+            $table->float('amount')->default(0);
         });
 
     }

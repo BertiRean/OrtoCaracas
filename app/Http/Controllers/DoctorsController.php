@@ -55,7 +55,7 @@ class DoctorsController extends Controller
                   ->paginate(10);
 
         $data = [
-          'title_table' => 'Listado de Doctores',
+          'title_table' => 'Listado de Odontologos',
           'button_delete' => 'Eliminar Doctor',
           'button_create' => 'Registrar Doctor',
           'model_labels' => array("Nombre", "Cedula", "Especialidad","Telefono 1", "Telefono 2", "Direccion", "Cuenta Bancaria", "Email" ,"Acciones"),
@@ -82,7 +82,7 @@ class DoctorsController extends Controller
                   ->where('status', 1)->paginate(10);
 
         $data = [
-          'title_table' => 'Listado de Doctores',
+          'title_table' => 'Listado de Especialistas',
           'button_delete' => 'Eliminar Doctor',
           'button_create' => 'Registrar Doctor',
           'model_labels' => array("Nombre", "Cedula", "Especialidad","Telefono 1", "Telefono 2", "Direccion", "Cuenta Bancaria", "Email" ,"Acciones"),
